@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include "productos.h"
+#include <fstream>
 
 using namespace std;
 
@@ -19,6 +20,24 @@ public:
         for (int i=0; i < Productos.size(); i++) {
             cout << Productos[i].getDatos() << endl;
         }
+    }
+
+    // Función para leer el inventario desde un archivo
+    void leerInventarioDesdeArchivo(vector<Producto>& Productos, const string& nombreArchivo) {
+        ifstream archivo(nombreArchivo);
+        if (!archivo) {
+            cerr << "Error al abrir el archivo: " << nombreArchivo << endl;
+            return;
+        }
+
+        string nombre;
+        float precio;
+        int stock;
+
+        while (archivo >> nombre >> precio >> stock) {
+            add(Productos, precio, nombre, stock);
+        }
+        archivo.close();
     }
 
     //Funcion Merge para cada caso usando vectores
