@@ -25,7 +25,8 @@ cout << "7. Buscar Cliente Por Nombre\n";
 cout << "8. Buscar Cliente Por ID\n";
 cout << "9. Añadir Cliente\n";
 cout << "10. Eliminar Cliente\n";
-cout << "11. Salir\n";
+cout << "11. Agregar Productos Desde Archivo Externo\n";
+cout << "12. Salir\n";
 }
 
 
@@ -78,6 +79,7 @@ int main() {
     Cliente* clienteEncontrado = nullptr;
     float precioBuscado;
     string atributo;
+    string nombreArchivo;
 
     // Mostrar el inventario sin ordenar
     cout << "Inventario original:\n";
@@ -86,7 +88,7 @@ int main() {
    
     // Ordenar según la opción seleccionada
     
-    while (opcion != 11){
+    while (opcion != 12){
         menu();
         cout << "Elige una opcion: ";
         cin >> opcion;
@@ -195,9 +197,17 @@ int main() {
                 cout << "Clientes en orden después de eliminar a " << nombreAEliminar << ":" << endl;
                 arbolClientes.mostrarClientesEnOrden();
                 break;
-
             
             case 11:
+            cout <<"\nIngrese el nombre del archivo: ";
+            cin.ignore(); getline(cin, nombreArchivo);
+            cout << "Agregando Productos de: " << nombreArchivo << endl;
+            tienda.leerInventarioDesdeArchivo(Productos, nombreArchivo);
+            cout << "Productos despues de importar de " << nombreArchivo << " :" << endl;
+            tienda.mostrarInventario(Productos);
+            break;
+            
+            case 12:
                 cout << "Cerrando Programa" << endl;
                 break;
 
